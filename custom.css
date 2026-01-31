@@ -1,0 +1,533 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0f0c29, #171624, #24243e);
+  color: #fff;
+  font-size: 16px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Main layout */
+.main-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+}
+/* Background Blobs for Atmosphere */
+.background-blobs {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  filter: blur(80px);
+  opacity: 0.6;
+  border-radius: 50%;
+  animation: float 10s infinite ease-in-out;
+}
+
+.blob-1 {
+  width: 400px;
+  height: 400px;
+  background: #6366f1;
+  top: -50px;
+  left: -100px;
+}
+
+.blob-2 {
+  width: 350px;
+  height: 350px;
+  background: #ec4899;
+  bottom: -50px;
+  right: -50px;
+  animation-delay: 2s;
+}
+.main-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.main-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #a18cd1, #fbc2eb);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 15px rgba(161, 140, 209, 0.3);
+  letter-spacing: -1px;
+}
+
+/* Glassmorphism Container */
+.contents {
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  border-radius: 24px;
+  padding:2.5rem 2.5rem 2rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  overflow: hidden;
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+/* Input Area */
+.input-area {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.input-area input {
+  width: 100%;
+  padding: .7rem 1.5rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  color: #fff;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-area input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.input-area input:focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.05),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-area .add-btn {
+  font-size: 2rem;
+  padding: 0 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+}
+
+.input-area .add-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(118, 75, 162, 0.6);
+  filter: brightness(1.1);
+}
+
+.input-area .add-btn:active {
+  transform: translateY(1px);
+}
+
+/* List Container & Items */
+.list-container .to-do-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.list-container .to-do-list .item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.list-container .to-do-list .item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(5px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Checkbox & Text */
+.list-container .custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  flex: 1;
+  user-select: none;
+}
+
+.list-container .custom-checkbox input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.checkmark {
+  position: relative;
+  height: 24px;
+  width: 24px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.custom-checkbox:hover .checkmark {
+  border-color: #a18cd1;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: transparent;
+  transform: scale(1.1) rotate(360deg);
+}
+
+.checkmark:after {
+  content: "";
+  display: none;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translateY(-1px);
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.todo-text {
+  color: #e0e0e0;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+.custom-checkbox input:checked ~ .todo-text {
+  color: #797979;
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* Delete Button */
+.todo-del {
+  background: rgba(255, 75, 75, 0.1);
+  color: #ff6b6b;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8) rotate(-10deg);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin-left: 12px;
+  font-weight: bold;
+}
+
+.list-container .to-do-list .item:hover .todo-del {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.todo-del:hover {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 75, 75, 0.4);
+  transform: scale(1.1) !important;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .main-container {
+    padding: 1rem;
+  }
+  .contents {
+    padding: 1.5rem;
+  }
+  .main-header h1 {
+    font-size: 2.2rem;
+  }
+  .input-area {
+    flex-direction: column;
+  }
+  .input-area .add-btn {
+    width: 100%;
+    padding: 0.8rem;
+  }
+}
+
+.toggle {
+  color: #797979;
+}
+
+/* Controller Section */
+.controller {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.controller .all-del-btn {
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+  color: white;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.controller .all-del-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 65, 108, 0.5);
+  filter: brightness(1.1);
+}
+
+.controller .all-del-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Modal Overlay */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex; /* Toggle via JS if needed, e.g., display: none */
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Modal Visible State (Add 'active' class via JS) */
+.modal-container.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-container .dimmer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1;
+}
+
+/* Modal Content */
+.modal-container .modal {
+  position: relative;
+  width: 90%;
+  max-width: 380px;
+  min-height: 200px;
+  background: rgba(30, 30, 40, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  z-index: 2;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-container.active .modal {
+  transform: scale(1) translateY(0);
+}
+
+.modal-container .modal .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.modal-container .modal .close-btn:hover {
+  background: #ff416c;
+  transform: rotate(90deg);
+  box-shadow: 0 0 15px rgba(255, 65, 108, 0.5);
+}
+
+.modal-container .modal .modal-text {
+  color: #e0e0e0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+/* Modal Inner Layout */
+.modal-container .modal .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.modal-container .modal .btn-area {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.modal-container .modal .btn-area.hide {
+  display: none;
+}
+
+/* Modal Buttons */
+.modal-container .modal .btn {
+  padding: 0.8rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  min-width: 100px;
+  text-align: center;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-container .modal .btn.yes {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+  border: none;
+}
+
+.modal-container .modal .btn.yes:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(118, 75, 162, 0.6);
+  filter: brightness(1.1);
+}
+
+.modal-container .modal .btn.yes:active {
+  transform: translateY(1px);
+}
+
+.modal-container .modal .btn.no {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ccc;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-container .modal .btn.no:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.modal-container .modal .btn.no:active {
+  transform: scale(0.98);
+}

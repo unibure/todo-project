@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="custom.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <!-- 
+        1. 로고부분 
+        2. input창에 입력해서 추가할수있는 기능
+        3. list 현황
+        4. list를 삭제할수있는 기능
+        -->
+
+    <main class="main-container">
+      <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+      </div>
+      <header class="main-header">
+        <h1>To do List</h1>
+      </header>
+
+      <div class="contents">
+        <div class="input-area">
+          <input type="text" placeholder="오늘의 할일을 입력하세요" value="" />
+          <button class="add-btn">+</button>
+        </div>
+
+        <div class="list-container">
+          <ul class="to-do-list">
+            <!-- <li class="item">
+              <label class="custom-checkbox">
+                <input type="checkbox" />
+                <span class="checkmark"></span>
+                <span class="todo-text"></span>
+              </label>
+              <button class="todo-del">X</button>
+            </li> -->
+          </ul>
+        </div>
+        <div class="controller">
+          <button class="all-del-btn">Clear All</button>
+        </div>
+      </div>
+    </main>
+    <div class="modal-container">
+      <div class="dimmer"></div>
+      <div class="modal">
+        <span class="close-btn">X</span>
+        <div class="content">
+          <span class="modal-text"></span>
+          <div class="btn-area">
+            <span class="btn yes">Yes</span>
+            <span class="btn no">No</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
