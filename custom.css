@@ -34,7 +34,8 @@ button {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center; justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 /* Background Blobs for Atmosphere */
 .background-blobs {
@@ -95,7 +96,7 @@ button {
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.125);
   border-radius: 24px;
-  padding:2.5rem 2.5rem 2rem;
+  padding: 2.5rem 2.5rem 2rem;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   overflow: hidden;
   animation: fadeInUp 0.8s ease-out 0.2s backwards;
@@ -111,7 +112,7 @@ button {
 
 .input-area input {
   width: 100%;
-  padding: .7rem 1.5rem;
+  padding: 0.7rem 1.5rem;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
@@ -175,6 +176,10 @@ button {
   animation: slideIn 0.3s ease-out forwards;
 }
 
+.list-container .to-do-list .item.drag-start {
+  opacity: .5;
+}
+
 .list-container .to-do-list .item:hover {
   background: rgba(255, 255, 255, 0.08);
   transform: translateX(5px);
@@ -192,7 +197,7 @@ button {
   user-select: none;
 }
 
-.list-container .custom-checkbox input {
+.list-container .custom-checkbox > input {
   position: absolute;
   width: 0;
   height: 0;
@@ -238,6 +243,8 @@ button {
   display: block;
 }
 
+.custom-checkbox .inner {display: flex;}
+
 .todo-text {
   color: #e0e0e0;
   font-size: 1rem;
@@ -254,7 +261,7 @@ button {
 }
 
 /* Delete Button */
-.todo-del {
+.todo-btn {
   background: rgba(255, 75, 75, 0.1);
   color: #ff6b6b;
   width: 32px;
@@ -270,12 +277,12 @@ button {
   font-weight: bold;
 }
 
-.list-container .to-do-list .item:hover .todo-del {
+.list-container .to-do-list .item:hover .todo-btn {
   opacity: 1;
   transform: scale(1) rotate(0deg);
 }
 
-.todo-del:hover {
+.todo-btn:hover {
   background: linear-gradient(135deg, #ff416c, #ff4b2b);
   color: white;
   box-shadow: 0 4px 10px rgba(255, 75, 75, 0.4);
@@ -532,3 +539,14 @@ button {
 .modal-container .modal .btn.no:active {
   transform: scale(0.98);
 }
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  filter: grayscale(100%);
+  box-shadow: none !important;
+  transform: none !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
