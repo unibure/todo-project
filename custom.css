@@ -1,4 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+/* 다크 모드 색상 */
+:root {
+  --bg-color: linear-gradient(135deg, #0f0c29, #2c2b33, #24243e);
+  --text-color: #f0f0f0;
+  --item-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg: rgba(0, 0, 0, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --blob-opacity: 0.5;
+  --checkbox-bg: rgba(255, 255, 255, 0.1);
+  --checkbox-border: rgba(255, 255, 255, 0.2);
+}
+body.light-mode {
+  --bg-color: #f0f2f5;
+  --text-color: #333;
+  --item-bg: rgba(255, 255, 255, 0.6);
+  --glass-bg: rgba(255, 255, 255, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --input-bg: rgba(255, 255, 255, 0.5);
+  --blob-opacity: 0.6;
+  --checkbox-bg: rgba(0, 0, 0, 0.05);
+  --checkbox-border: rgba(0, 0, 0, 0.2);
+}
 
 * {
   margin: 0;
@@ -8,7 +31,6 @@
 }
 
 body {
-  background: linear-gradient(135deg, #0f0c29, #171624, #24243e);
   color: #fff;
   font-size: 16px;
   min-height: 100vh;
@@ -16,6 +38,16 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition:
+    background 0.3s,
+    color 0.3s;
+  /* 부드러운 전환 효과 */
+}
+
+.item {
+  background-color: var(--item-bg);
 }
 
 ul,
@@ -48,8 +80,7 @@ button {
 
 .blob {
   position: absolute;
-  filter: blur(80px);
-  opacity: 0.6;
+  opacity: var(--blob-opacity);
   border-radius: 50%;
   animation: float 10s infinite ease-in-out;
 }
@@ -60,6 +91,7 @@ button {
   background: #6366f1;
   top: -50px;
   left: -100px;
+  filter: blur(80px);
 }
 
 .blob-2 {
@@ -69,11 +101,45 @@ button {
   bottom: -50px;
   right: -50px;
   animation-delay: 2s;
+  filter: blur(80px);
 }
 .main-header {
   text-align: center;
   margin-bottom: 2rem;
   animation: fadeInDown 0.8s ease-out;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Theme Toggle Button */
+.dark-mode-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dark-mode-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode-btn:active {
+  transform: translateY(0);
 }
 
 .main-header h1 {
@@ -91,15 +157,18 @@ button {
 .contents {
   max-width: 600px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.125);
+  border: 1px solid var(--glass-border);
   border-radius: 24px;
   padding: 2.5rem 2.5rem 2rem;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   overflow: hidden;
   animation: fadeInUp 0.8s ease-out 0.2s backwards;
+  transition:
+    background 0.3s,
+    border-color 0.3s;
 }
 
 /* Input Area */
@@ -113,10 +182,10 @@ button {
 .input-area input {
   width: 100%;
   padding: 0.7rem 1.5rem;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--input-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 14px;
-  color: #fff;
+  color: var(--text-color);
   outline: none;
   transition: all 0.3s ease;
   font-size: 1rem;
@@ -125,12 +194,13 @@ button {
 
 .edit-input,
 .input-area input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-color);
+  opacity: 0.6;
 }
 
 .edit-input,
 .input-area input:focus {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow:
     0 0 0 4px rgba(255, 255, 255, 0.05),
@@ -171,21 +241,21 @@ button {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.25rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--item-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
   transition: all 0.3s ease;
   animation: slideIn 0.3s ease-out forwards;
 }
 
 .list-container .to-do-list .item.drag-start {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .list-container .to-do-list .item:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.12);
   transform: translateX(5px);
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -210,8 +280,8 @@ button {
   position: relative;
   height: 24px;
   width: 24px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: var(--checkbox-bg);
+  border: 2px solid var(--checkbox-border);
   border-radius: 50%;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
@@ -222,7 +292,7 @@ button {
 
 .custom-checkbox:hover .checkmark {
   border-color: #a18cd1;
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: var(--input-bg);
 }
 
 .custom-checkbox input:checked ~ .checkmark {
@@ -245,12 +315,22 @@ button {
   display: block;
 }
 
-.custom-checkbox .inner {display: flex; align-items: center;}
-.custom-checkbox .inner .todo-btn {width: auto;padding-inline: .5rem; font-size: .75rem; }
-.custom-checkbox .inner:has(input) .todo-btn {opacity: 1; transform:none;}
+.custom-checkbox .inner {
+  display: flex;
+  align-items: center;
+}
+.custom-checkbox .inner .todo-btn {
+  width: auto;
+  padding-inline: 0.5rem;
+  font-size: 0.75rem;
+}
+.custom-checkbox .inner:has(input) .todo-btn {
+  opacity: 1;
+  transform: none;
+}
 
 .todo-text {
-  color: #e0e0e0;
+  color: var(--text-color);
   font-size: 1rem;
   font-weight: 400;
   transition: all 0.3s ease;
@@ -553,4 +633,3 @@ button {
   color: rgba(255, 255, 255, 0.3) !important;
   border: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
-

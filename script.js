@@ -246,3 +246,25 @@ addArea.addEventListener("keydown", (event) => {
     addList();
   }
 });
+
+const darkBtn = document.querySelector(".dark-mode-btn");
+
+//페이지 로드 시 기존 테마 설정 불러오기
+const currentTheme = localStorage.getItem("theme");
+if (currentTheme === "light") {
+  document.body.classList.add("light-mode");
+  darkBtn.textContent = "🌙 Dark Mode";
+}
+
+//버튼 클릭 시 테마 토글
+darkBtn.addEventListener("click", () => {
+  document.body.classList.toggle("light-mode");
+
+  if (document.body.classList.contains("light-mode")) {
+    localStorage.setItem("theme", "dark");
+    darkBtn.textContent = "🌙 Dark Mode";
+  } else {
+    localStorage.setItem("theme", "light");
+    darkBtn.textContent = "☀️ Light Mode";
+  }
+});
