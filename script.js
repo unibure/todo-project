@@ -28,13 +28,37 @@ todoList.addEventListener("click", (event) => {
     const originText = li.querySelector(".todo-text"); //기존 텍스트 요소
     const currentText = originText.textContent;
 
+    li.setAttribute("draggable", "false");
+
     customBox.innerHTML = `
         <input type="text" class="edit-input" value="${currentText}" />
         <button class="todo-btn todo-save">Save</button>
         <button class="todo-btn todo-cancel">Cancel</button>
       `;
 
-    li.querySelector(".edit-input").focus();
+    const input = li.querySelector(".edit-input");
+    input.focus();
+
+    const tempValue = input.value;
+    input.value = "";
+    input.value = tempValue;
+  }
+
+  if (event.target.classList.contains("todo-save")) {
+    const input = li.querySelector(".edit-input");
+    const newText = input.value.trim();
+
+    if (newText !== "") {
+      todos = todos.map((todo) => {
+        return todo.id === id ? { ...todo, text: newText } : todo;
+      });
+      li.setAttribute("draggable", "true");
+      saveAndRender();
+    }
+  }
+
+  if (event.target.classList.contains("todo-cancel")) {
+    renderTodos();
   }
 
   //삭제 버튼 클릭시
@@ -51,6 +75,19 @@ todoList.addEventListener("click", (event) => {
         : todo;
     });
     saveAndRender();
+  }
+});
+
+todoList.addEventListener("keydown", (e) => {
+  const li = e.target.closest("li");
+  if (!li) return;
+
+  const input = li.querySelector(".edit-input");
+  if (!input) return;
+
+  if (e.key === "Enter") {
+    li.setAttribute("draggable", "true");
+    li.querySelector(".todo-save").click();
   }
 });
 
@@ -97,9 +134,9 @@ todoList.addEventListener("dragend", (e) => {
   );
 
   //id 배열 순서에 맞춰서 기존 todos 배열을 재정렬한다
-  const newTodos = newOrderIds.map((id) => {
-    return todos.find((todo) => todo.id === id);
-  });
+  const newTodos = newOrderIds
+    .map((id) => todos.find((todo) => todo.id === id))
+    .filter((todo) => todo !== undefined); //검색 실패한 데이터는 제외
 
   todos = newTodos;
   localStorage.setItem("todos", JSON.stringify(todos)); //저장만하기

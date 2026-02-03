@@ -89,7 +89,7 @@ button {
 
 /* Glassmorphism Container */
 .contents {
-  max-width: 500px;
+  max-width: 600px;
   width: 100%;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(16px) saturate(180%);
@@ -109,7 +109,7 @@ button {
   margin-bottom: 2rem;
   position: relative;
 }
-
+.edit-input,
 .input-area input {
   width: 100%;
   padding: 0.7rem 1.5rem;
@@ -123,10 +123,12 @@ button {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.edit-input,
 .input-area input::placeholder {
   color: rgba(255, 255, 255, 0.4);
 }
 
+.edit-input,
 .input-area input:focus {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.3);
@@ -243,7 +245,9 @@ button {
   display: block;
 }
 
-.custom-checkbox .inner {display: flex;}
+.custom-checkbox .inner {display: flex; align-items: center;}
+.custom-checkbox .inner .todo-btn {width: auto;padding-inline: .5rem; font-size: .75rem; }
+.custom-checkbox .inner:has(input) .todo-btn {opacity: 1; transform:none;}
 
 .todo-text {
   color: #e0e0e0;
